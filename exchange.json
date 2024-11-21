@@ -1,0 +1,10 @@
+{
+  "main": "apicuentas.raml",
+  "name": "apicuentas",
+  "groupId": "49639555-335c-43bf-9697-856c374176c4",
+  "assetId": "apicuentas",
+  "version": "1.0.0",
+  "classifier": "raml",
+  "tags": [],
+  "descriptorVersion": "1.0.0"
+}
