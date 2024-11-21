@@ -1,2 +1,105 @@
 #%RAML 1.0
 title: apicuentas
+version: v1
+baseUri: https://api.example.com/apicuentas
+
+types:
+  Account:
+    type: object
+    properties:
+      id: string
+      name: string
+      email: string
+      balance: number
+      status: string
+
+/resources:
+  /accounts:
+    description: Manage accounts
+    get:
+      description: Retrieve a list of all accounts
+      responses:
+        200:
+          body:
+            application/json:
+              type: Account[]
+    post:
+      description: Create a new account
+      body:
+        application/json:
+          type: Account
+      responses:
+        201:
+          body:
+            application/json:
+              type: Account
+    /{id}:
+      uriParameters:
+        id:
+          description: The unique identifier of the account
+          type: string
+      get:
+        description: Retrieve details of a specific account
+        responses:
+          200:
+            body:
+              application/json:
+                type: Account
+      put:
+        description: Update details of an existing account
+        body:
+          application/json:
+            type: Account
+        responses:
+          200:
+            body:
+              application/json:
+                type: Account
+      post:
+        description: Add funds to the account
+        body:
+          application/json:
+            properties:
+              amount:
+                type: number
+        responses:
+          200:
+            body:
+              application/json:
+                type: Account
+      /status:
+        get:
+          description: Get the current status of an account
+          responses:
+            200:
+              body:
+                application/json:
+                  properties:
+                    id:
+                      type: string
+                    status:
+                      type: string
+  /accounts/summary:
+    get:
+      description: Retrieve a summary of all accounts
+      responses:
+        200:
+          body:
+            application/json:
+              properties:
+                totalAccounts:
+                  type: number
+                totalBalance:
+                  type: number
+  /accounts/search:
+    get:
+      description: Search accounts by name or email
+      queryParameters:
+        query:
+          description: Name or email to search
+          type: string
+      responses:
+        200:
+          body:
+            application/json:
+              type: Account[]
